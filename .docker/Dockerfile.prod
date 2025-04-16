@@ -1,0 +1,15 @@
+
+ARG NATS_VERSION=2.10.2-alpine
+FROM nats:${NATS_VERSION} AS prod
+
+
+RUN mkdir -p /etc/nats /data /var/log/nats
+
+
+COPY server.conf /etc/nats/server.conf
+
+
+RUN chmod 644 /etc/nats/server.conf
+
+
+CMD ["nats-server", "-c", "/etc/nats/server.conf"]
